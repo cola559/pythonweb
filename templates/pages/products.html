@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mb-5" style="padding-top: 120px;">
+    <h2 class="pb-2 mb-4" style="border-bottom: 1px solid rgba(255,255,255,0.05);">AI 产品与算力部署</h2>
+    <div class="row g-4">
+        <div class="col-md-6 mb-4">
+            <div class="feature-card h-100 p-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" class="w-100" style="height: 200px; object-fit: cover;" alt="LLM API">
+                <div class="p-4">
+                    <h4 class="fw-bold mb-3" style="color: var(--primary-color);">Nebula-LLM 接口 (API)</h4>
+                    <h5 style="color: var(--text-main);">流式响应，极简接入</h5>
+                    <p class="mt-3 mb-4" style="color: var(--text-muted); line-height: 1.7;">提供与 OpenAI 完全兼容的 RESTful API。支持 128K 超长上下文窗口，无论是知识库构建还是智能客服，两行代码即可完成模型接入。</p>
+                    <button class="btn btn-outline-custom btn-sm">查看开发者文档</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="feature-card h-100 p-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" class="w-100" style="height: 200px; object-fit: cover;" alt="NovaSpace Server">
+                <div class="p-4">
+                    <h4 class="fw-bold mb-3" style="color: var(--primary-color);">NovaSpace 独立算力舱</h4>
+                    <h5 style="color: var(--text-main);">专为企业级微调打造</h5>
+                    <p class="mt-3 mb-4" style="color: var(--text-muted); line-height: 1.7;">无需采购昂贵的硬件。我们提供预装完整训练环境（PyTorch/CUDA）的裸金属服务器，分钟级启动，按小时计费。</p>
+                    <button class="btn btn-outline-custom btn-sm">测算算力成本</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

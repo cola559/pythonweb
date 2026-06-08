@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero-section text-center">
+    <div class="container">
+        <div class="badge rounded-pill text-light px-3 py-2 mb-4" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); font-weight: 400;">
+            ✨ Nebula-LLM 4.0 多模态模型现已开源
+        </div>
+        
+        <h1 class="hero-title">计算，<br>涌现无限可能。</h1>
+        <p class="hero-subtitle">构建下一代通用人工智能基座。为您提供从底层算力集群到顶层认知大模型的全链路级 AI 基础设施。</p>
+        
+        <div class="d-flex justify-content-center gap-4 mt-5">
+            <a href="{% url 'products' %}" class="btn btn-custom">获取 API 密钥</a>
+            <a href="{% url 'about' %}" class="btn btn-outline-custom">阅读技术报告</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 pt-5 mb-5 pb-5">
+    <div class="text-center mb-5 pb-3">
+        <h2 class="fw-bold text-white" style="letter-spacing: -0.5px; font-size: 2.5rem;">平台核心引擎</h2>
+        <p class="text-muted mt-3 fs-5">突破算力瓶颈，重塑智能边界</p>
+    </div>
+    
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="feature-card h-100">
+                <div class="icon-wrapper">🧠</div>
+                <h5 class="feature-title">认知大模型阵列</h5>
+                <p class="feature-desc">千亿级参数规模，支持多语种、视觉与逻辑推理。一次接入，即刻赋予您的应用人类级别的上下文理解能力。</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card h-100">
+                <div class="icon-wrapper">⚡</div>
+                <h5 class="feature-title">分布式算力网络</h5>
+                <p class="feature-desc">依托全球 50 个数据中心节点，提供秒级弹性扩缩容的 GPU 算力池。模型训练速度平均提升 300%。</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card h-100">
+                <div class="icon-wrapper">🛡️</div>
+                <h5 class="feature-title">联邦学习与隐私盾</h5>
+                <p class="feature-desc">独创的机密计算空间（TEE），让数据可用不可见。确保企业核心语料在微调模型时的数据绝对主权。</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

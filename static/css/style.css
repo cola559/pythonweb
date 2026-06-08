@@ -1,0 +1,233 @@
+/* ========================================= */
+/* 1. 基础配置与国际化字体引入 */
+/* ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+    /* 主题色系：赛博蓝/量子紫 */
+    --primary-color: #00f2fe; 
+    --accent-color: #4facfe;  
+    --dark-bg: #050b14;       /* 极暗蓝灰背景，比纯黑更有质感 */
+    --card-bg: #0f172a;       /* 卡片背景 */
+    --text-main: #f8fafc;     /* 主文本色（极淡的灰白） */
+    --text-muted: #94a3b8;    /* 次级文本色 */
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased; /* 让文字渲染更平滑锐利 */
+}
+
+/* ========================================= */
+/* 2. 导航栏 (悬浮毛玻璃特效 Glassmorphism) */
+/* ========================================= */
+.navbar-custom {
+    background: rgba(5, 11, 20, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    font-size: 1.4rem;
+}
+
+.nav-link {
+    font-weight: 400;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: var(--text-main) !important;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    color: var(--primary-color) !important;
+    transform: translateY(-1px); /* 悬停时微微上浮 */
+}
+
+/* ========================================= */
+/* 3. 首页巨幕区 (星云背景漂移与呼吸特效) */
+/* ========================================= */
+.hero-section {
+    position: relative;
+    padding: 180px 0 120px;
+    
+    /* 双层背景：半透明渐变遮罩 + 真实星云科技图片 */
+    background: linear-gradient(rgba(5, 11, 20, 0.85), rgba(5, 11, 20, 0.95)),
+                url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000&auto=format&fit=crop') no-repeat;
+    
+    /* 放大背景图为漂移留出空间 */
+    background-size: 150% 150%; 
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    
+    /* 绑定星云漂移动画：持续60秒，无限平滑往复 */
+    animation: nebulaDrift 60s ease-in-out infinite alternate;
+}
+
+/* 星云漂移关键帧 */
+@keyframes nebulaDrift {
+    0%   { background-position: 0% 0%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 50% 100%; }
+}
+
+/* 背景呼吸光晕（极微弱的亮度跳动） */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(0, 242, 254, 0.03) 0%, transparent 50%);
+    animation: pulseGlow 8s ease-in-out infinite alternate;
+    pointer-events: none; /* 防止遮挡鼠标点击 */
+    z-index: 0;
+}
+
+@keyframes pulseGlow {
+    0%   { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+/* 确保巨幕内容层级在光晕之上 */
+.hero-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================= */
+/* 4. 巨幕文字与按钮样式 */
+/* ========================================= */
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    /* 苹果发布会级别的文字流光渐变 */
+    background: linear-gradient(135deg, #ffffff, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+}
+
+/* 实心高亮按钮 */
+.btn-custom {
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    color: #000;
+    font-weight: 600;
+    padding: 14px 36px;
+    border-radius: 30px;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.3);
+    color: #000;
+}
+
+/* 描边虚化按钮 */
+.btn-outline-custom {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-custom:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+/* ========================================= */
+/* 5. 科技悬浮交互卡片 */
+/* ========================================= */
+.feature-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 40px 30px;
+    
+    /* 这里取消了 transform 的过渡，为了配合 JS 的 3D 实时倾斜特效 */
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    transform-style: preserve-3d;
+}
+
+/* 注意：卡片的 hover 发光效果现在交由 JS 来精确控制，这里保留基础的颜色变化 */
+.feature-card:hover {
+    border-color: rgba(0, 242, 254, 0.4);
+}
+
+.icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: rgba(0, 242, 254, 0.1);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 24px;
+}
+
+.feature-title {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.feature-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* ========================================= */
+/* 6. 极简页脚 */
+/* ========================================= */
+footer {
+    background-color: #020617; /* 底部使用最暗的色阶 */
+    color: var(--text-muted);
+    padding: 30px 0;
+    text-align: center;
+    margin-top: auto; /* 保证页脚始终贴在底部 */
+    font-size: 0.85rem;
+}
+
+/* ========================================= */
+/* 7. 页面元素滚动丝滑浮现特效 (Scroll Reveal) */
+/* ========================================= */
+
+/* 初始隐藏状态：透明且向下偏移 */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 激活状态：当 JS 检测到元素进入屏幕时，加上此类名即可浮现 */
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}

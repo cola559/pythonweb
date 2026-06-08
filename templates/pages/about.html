@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mb-5" style="padding-top: 120px;">
+    <h2 class="pb-2 mb-4" style="border-bottom: 1px solid rgba(255,255,255,0.05);">关于 Nebula AI</h2>
+    <div class="row g-5 align-items-center">
+        <div class="col-md-6">
+            <p class="fs-5" style="color: var(--text-main);"><strong>星云智算 (Nebula AI)</strong> 创立于 2021 年，是一家专注于通用人工智能（AGI）研发的顶尖科技实验室。</p>
+            <p style="color: var(--text-muted); line-height: 1.8;">从自然语言处理起步，我们正在逐步攻克具身智能与多模态生成技术。我们的团队由深度学习领域的早期开拓者组成。目前，Nebula 提供的算力与模型接口正驱动着全球上万家初创企业的 AI 产品迭代。</p>
+            <div class="mt-4 p-4 rounded-4" style="background: rgba(0, 242, 254, 0.05); border: 1px solid rgba(0, 242, 254, 0.2);">
+                <p class="fst-italic mb-0" style="color: var(--primary-color);">"让智慧像星云一样，弥漫并在每一个终端中闪耀。"</p>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Nebula AI Lab" 
+                 class="img-fluid rounded-4 shadow-lg" 
+                 style="border: 1px solid rgba(255,255,255,0.1); transition: transform 0.5s ease;"
+                 onmouseover="this.style.transform='scale(1.02)'" 
+                 onmouseout="this.style.transform='scale(1)'">
+        </div>
+    </div>
+</div>
+{% endblock %}

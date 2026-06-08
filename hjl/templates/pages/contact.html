@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h2 class="border-bottom border-success pb-2 mb-4">联系我们</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body bg-white">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label text-muted">您的姓名</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted">留言内容</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-success w-100">提交留言</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group list-group-flush shadow-sm rounded">
+                <li class="list-group-item py-3"><strong>📍 地址：</strong> 科技创新园区环保大道 88 号</li>
+                <li class="list-group-item py-3"><strong>📞 电话：</strong> 400-888-8888</li>
+                <li class="list-group-item py-3"><strong>✉️ 邮箱：</strong> contact@greenpower.hjl</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
