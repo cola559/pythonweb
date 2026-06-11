@@ -1,26 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div class="container mb-5" style="padding-top: 120px; max-width: 800px;">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'news_list' %}" class="text-white-50 text-decoration-none">新闻中心</a></li>
-            <li class="breadcrumb-item active" style="color: var(--primary-color);">{{ news.category.name }}</li>
-        </ol>
-    </nav>
 
-    <h1 class="hero-title text-start mb-3" style="font-size: 2.5rem;">{{ news.title }}</h1>
+<div class="container mb-5" style="padding-top: 120px; max-width: 900px;">
+    <a href="{% url 'news:news_list' %}" class="btn btn-sm btn-outline-secondary mb-4 text-white-50" style="border-color: rgba(255,255,255,0.1);">< 返回资讯列表</a>
     
-    <div class="d-flex gap-3 text-white-50 mb-5 border-bottom border-secondary pb-3">
-        <span>发布时间：{{ news.publish_date|date:"Y-m-d H:i" }}</span>
-        <span>阅读量：{{ news.views }}</span>
+    <div class="text-center mb-5 border-bottom border-secondary pb-4">
+        <span class="badge mb-3" style="background: rgba(0, 242, 254, 0.1); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.3);">{{ news.newType }}</span>
+        <h1 class="text-white fw-bold mb-4" style="line-height: 1.4; font-size: 2.4rem;">{{ news.title }}</h1>
+        <div class="d-flex justify-content-center text-white-50" style="font-size: 0.9rem;">
+            <span class="mx-3">📅 发布时间：{{ news.publishDate|date:"Y-m-d H:i" }}</span>
+            <span class="mx-3">👁️ 浏览热度：{{ news.views }} 次阅读</span>
+        </div>
     </div>
 
-    <div class="news-content text-light" style="line-height: 2; font-size: 1.1rem; letter-spacing: 0.5px;">
-        {{ news.content|linebreaks }}
-    </div>
-
-    <div class="mt-5">
-        <a href="{% url 'news_list' %}" class="btn btn-outline-custom">返回列表</a>
+    <div class="article-content text-light p-4 rounded-4" style="background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.05); line-height: 1.8; font-size: 1.05rem;">
+        {{ news.content|safe }}
     </div>
 </div>
+
+<style>
+    .article-content img {
+        max-width: 100% !important;
+        height: auto !important;
+        border-radius: 8px;
+        margin: 20px 0;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .article-content p {
+        margin-bottom: 1.5rem;
+        color: rgba(243, 244, 246, 0.9);
+    }
+</style>
+
 {% endblock %}

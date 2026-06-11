@@ -12,21 +12,26 @@
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
       <div class="container">
-        <a class="navbar-brand text-white" href="{% url 'home' %}">
-            <span style="color: var(--primary-color);">✦</span> Nebula AI.
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: rgba(255,255,255,0.1);">
-          <span class="navbar-toggler-icon" style="filter: invert(1) grayscale(100%) brightness(200%);"></span>
+        <a class="navbar-brand text-white" href="{% url 'home' %}">✦ Nebula AI.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+          
           <ul class="navbar-nav ms-auto gap-3">
             <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">平台首页</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">关于星云</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'products' %}">API与算力</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'news_list' %}">新闻中心</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">接入咨询</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'serviceApp:platform' %}">API与算力</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'products:product_list' %}">产品矩阵</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">新闻中心</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact' %}">接入咨询</a></li>
           </ul>
+
+          <form class="d-flex ms-lg-4 mt-3 mt-lg-0" method="get" action="/search/">
+            <input class="form-control me-2" type="search" name="q" placeholder="全站探索..." style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(0,242,254,0.3); color: #fff; border-radius: 20px;">
+            <button class="btn btn-outline-info" type="submit" style="border-radius: 20px; box-shadow: 0 0 10px rgba(0,242,254,0.2);">搜索</button>
+          </form>
+
         </div>
       </div>
     </nav>
@@ -35,13 +40,8 @@
         {% block content %}{% endblock %}
     </div>
 
-    <footer>
-        <div class="container">
-            <p class="mb-0">© 2026 Nebula AI Network. 保留所有权利.</p>
-        </div>
-    </footer>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
+
+    </body>
 </html>

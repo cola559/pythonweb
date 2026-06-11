@@ -1,49 +1,123 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div class="hero-section text-center">
-    <div class="container">
-        <div class="badge rounded-pill text-light px-3 py-2 mb-4" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); font-weight: 400;">
-            ✨ Nebula-LLM 4.0 多模态模型现已开源
+
+<style>
+    #heroCarousel { margin-top: 76px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); position: relative; }
+    .carousel-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(11, 15, 25, 0.3) 0%, rgba(11, 15, 25, 0.95) 100%); z-index: 1; }
+    .carousel-item img { height: 580px; object-fit: cover; }
+    
+    /* 卡片悬浮特效 */
+    .tech-card { background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; transition: all 0.4s; }
+    .tech-card:hover { transform: translateY(-8px); border-color: rgba(0, 242, 254, 0.5); box-shadow: 0 10px 20px rgba(0, 242, 254, 0.1); }
+    
+    /* 🛠️ 终极穿透控制：确保按钮和箭头绝对可点击 */
+    .cyber-btn {
+        position: relative !important;
+        z-index: 99999 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    /* 强制重写轮播图箭头位置，确保贴紧屏幕左右两侧 */
+    .carousel-control-prev, .carousel-control-next {
+        width: 10% !important; /* 增加点击感应区宽度 */
+        opacity: 0.7;
+    }
+    .carousel-control-prev:hover, .carousel-control-next:hover { opacity: 1; }
+    .carousel-control-prev { left: 0 !important; }
+    .carousel-control-next { right: 0 !important; }
+</style>
+
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+    
+    <div class="carousel-indicators" style="z-index: 99999;">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="carousel-overlay"></div>
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1600&auto=format&fit=crop" class="d-block w-100">
+            <div class="carousel-caption d-flex flex-column h-100 align-items-center justify-content-center" style="z-index: 2;">
+                <h1 class="fw-bold text-white mb-3" style="font-size: 3.2rem;">计算，涌现无限可能。</h1>
+                <div class="d-flex gap-3">
+                    <button type="button" class="btn btn-primary px-4 py-2 cyber-btn" onclick="window.location.href='{% url 'products:product_list' %}'">获取 API 密钥</button>
+                    <button type="button" class="btn btn-outline-light px-4 py-2 cyber-btn" onclick="window.location.href='{% url 'about' %}'">阅读技术报告</button>
+                </div>
+            </div>
         </div>
-        
-        <h1 class="hero-title">计算，<br>涌现无限可能。</h1>
-        <p class="hero-subtitle">构建下一代通用人工智能基座。为您提供从底层算力集群到顶层认知大模型的全链路级 AI 基础设施。</p>
-        
-        <div class="d-flex justify-content-center gap-4 mt-5">
-            <a href="{% url 'products' %}" class="btn btn-custom">获取 API 密钥</a>
-            <a href="{% url 'about' %}" class="btn btn-outline-custom">阅读技术报告</a>
+
+        <div class="carousel-item">
+            <div class="carousel-overlay"></div>
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" class="d-block w-100">
+            <div class="carousel-caption d-flex flex-column h-100 align-items-center justify-content-center" style="z-index: 2;">
+                <h1 class="fw-bold text-white mb-3" style="font-size: 3.2rem;">边缘算力实时响应</h1>
+                <button type="button" class="btn btn-success px-4 py-2 cyber-btn" onclick="window.location.href='{% url 'serviceApp:platform' %}'" style="background: #00ff80; border: none; color: #000; font-weight: bold; box-shadow: 0 0 15px rgba(0,255,128,0.4);">查看开发者文档</button>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-overlay"></div>
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1600&auto=format&fit=crop" class="d-block w-100">
+            <div class="carousel-caption d-flex flex-column h-100 align-items-center justify-content-center" style="z-index: 2;">
+                <h1 class="fw-bold text-white mb-3" style="font-size: 3.2rem;">安全与成本测算</h1>
+                <button type="button" class="btn btn-danger px-4 py-2 cyber-btn" onclick="window.location.href='{% url 'contact:contact' %}'" style="background: #ff4757; border: none; font-weight: bold; box-shadow: 0 0 15px rgba(255,71,87,0.4);">测算算力成本</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev cyber-btn" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+        <span class="visually-hidden">上一张</span>
+    </button>
+    <button class="carousel-control-next cyber-btn" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+        <span class="visually-hidden">下一张</span>
+    </button>
+</div>
+
+<div class="container mt-5 pt-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-white">驱动未来的核心动力</h2>
+        <p class="text-white-50 mt-2">专为企业级大模型微调与推理打造的软硬件一体化解决方案</p>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-secondary tech-card p-4 text-center">
+                <div class="mb-3"><span style="font-size: 3rem;">🚀</span></div>
+                <h4 class="card-title fw-bold text-white">NovaSpace 算力舱</h4>
+                <p class="card-text text-white-50 mt-3 mb-4">无需采购昂贵的硬件。我们提供预装完整训练环境 (PyTorch/CUDA) 的裸金属服务器，分钟级启动，按小时计费。</p>
+                <button class="btn btn-outline-info mt-auto cyber-btn" onclick="window.location.href='{% url 'products:product_list' %}'">查看算力矩阵</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-secondary tech-card p-4 text-center">
+                <div class="mb-3"><span style="font-size: 3rem;">🛡️</span></div>
+                <h4 class="card-title fw-bold text-white">隐私安全隔离</h4>
+                <p class="card-text text-white-50 mt-3 mb-4">金融级数据安全标准，物理级网络完全隔离。强效保障企业私有数据在模型训练与微调过程中的绝对安全。</p>
+                <button class="btn btn-outline-success mt-auto cyber-btn" onclick="window.location.href='{% url 'about' %}'">阅读安全白皮书</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-secondary tech-card p-4 text-center">
+                <div class="mb-3"><span style="font-size: 3rem;">⚡</span></div>
+                <h4 class="card-title fw-bold text-white">API 实时推理</h4>
+                <p class="card-text text-white-50 mt-3 mb-4">提供毫秒级响应的高吞吐量 API 接口，支持多种主流开源大模型的一键部署与无缝业务集成，赋能企业 AI 转型。</p>
+                <button class="btn btn-outline-warning mt-auto cyber-btn" onclick="window.location.href='{% url 'contact:contact' %}'">提交部署需求</button>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="container mt-5 pt-5 mb-5 pb-5">
-    <div class="text-center mb-5 pb-3">
-        <h2 class="fw-bold text-white" style="letter-spacing: -0.5px; font-size: 2.5rem;">平台核心引擎</h2>
-        <p class="text-muted mt-3 fs-5">突破算力瓶颈，重塑智能边界</p>
-    </div>
-    
-    <div class="row text-center g-4">
-        <div class="col-md-4">
-            <div class="feature-card h-100">
-                <div class="icon-wrapper">🧠</div>
-                <h5 class="feature-title">认知大模型阵列</h5>
-                <p class="feature-desc">千亿级参数规模，支持多语种、视觉与逻辑推理。一次接入，即刻赋予您的应用人类级别的上下文理解能力。</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="feature-card h-100">
-                <div class="icon-wrapper">⚡</div>
-                <h5 class="feature-title">分布式算力网络</h5>
-                <p class="feature-desc">依托全球 50 个数据中心节点，提供秒级弹性扩缩容的 GPU 算力池。模型训练速度平均提升 300%。</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="feature-card h-100">
-                <div class="icon-wrapper">🛡️</div>
-                <h5 class="feature-title">联邦学习与隐私盾</h5>
-                <p class="feature-desc">独创的机密计算空间（TEE），让数据可用不可见。确保企业核心语料在微调模型时的数据绝对主权。</p>
-            </div>
-        </div>
+<div class="container mt-5 pt-5 mb-5 border-top" style="border-color: rgba(255,255,255,0.05) !important;">
+    <div class="row text-center g-4 mt-2">
+        <div class="col-md-4"><div class="tech-card p-4 text-white">🧠 认知大模型阵列</div></div>
+        <div class="col-md-4"><div class="tech-card p-4 text-white">⚡ 分布式边缘网络</div></div>
+        <div class="col-md-4"><div class="tech-card p-4 text-white">🛡️ TEE 隐私计算节点</div></div>
     </div>
 </div>
+
 {% endblock %}

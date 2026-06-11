@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mb-5" style="padding-top: 120px; min-height: 80vh;">
+    <div class="mb-5 border-bottom border-secondary pb-3">
+        <h2 class="hero-title text-white mb-2" style="font-size: 2rem;">
+            🔍 检索结果：<span style="color: #00f2fe;">"{{ query }}"</span>
+        </h2>
+    </div>
+
+    {% if query %}
+        <div class="row g-4">
+            {% for result in page.object_list %}
+            <div class="col-12">
+                <div class="card p-4 rounded-4 border-secondary" style="background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); transition: transform 0.3s;">
+                    <a href="{% url 'news:news_detail' result.object.id %}" class="text-decoration-none">
+                        <h4 class="text-white fw-bold mb-2">{{ result.object.title }}</h4>
+                        <p class="text-white-50 mb-3" style="font-size: 0.95rem;">
+                            {{ result.object.description|truncatechars:150 }}
+                        </p>
+                        <div class="d-flex align-items-center text-muted" style="font-size: 0.85rem;">
+                            <span class="me-3">📅 发布日期: {{ result.object.publishDate|date:"Y-m-d" }}</span>
+                            <span style="color: #00f2fe;">了解详情 →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <h4 class="text-white-50 mb-3">🛸 抱歉，星云节点未检索到相关资讯。</h4>
+                <p class="text-muted">请尝试更换缩减关键词，或检查拼写。</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if page.has_previous or page.has_next %}
+        <div class="mt-5 text-center">
+            {% if page.has_previous %}
+            <a href="?q={{ query }}&page={{ page.previous_page_number }}" class="btn btn-outline-info me-2">← 上一页</a>
+            {% endif %}
+            <span class="text-white-50">第 {{ page.number }} 页 / 共 {{ page.paginator.num_pages }} 页</span>
+            {% if page.has_next %}
+            <a href="?q={{ query }}&page={{ page.next_page_number }}" class="btn btn-outline-info ms-2">下一页 →</a>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+    {% else %}
+        <div class="alert text-center" style="background: rgba(0,242,254,0.1); border: 1px solid #00f2fe; color: #00f2fe;">
+            请输入您想查询的大模型架构或算力资讯关键词。
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
