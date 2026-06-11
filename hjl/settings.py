@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'pages',
     'news', # 注册新 App
     'serviceApp', #刚刚新增的服务支持模块
+    # 👇 新增的这 3 行：富文本与搜索组件
+    'products', # 👇 新增这一行：算力产品矩阵模块
+    'ckeditor',
+    'ckeditor_uploader',
+    'haystack',
+    'contact',  # 👇 新增这一行：接入咨询与表单模块
 ]
 
 MIDDLEWARE = [
@@ -125,3 +131,43 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# ==========================================
+# 媒体文件配置（极其重要：用于保存用户上传的图片）
+# ==========================================
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# ==========================================
+# CKEditor 富文本编辑器配置
+# ==========================================
+CKEDITOR_UPLOAD_PATH = "news_uploads/"
+
+# ==========================================
+# Haystack 全文搜索引擎配置
+# ==========================================
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': BASE_DIR / 'whoosh_index',
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# ==========================================
+# 🔍 搜索引擎配置 (Haystack + Whoosh + Jieba)
+# ==========================================
+import os
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # 👇 核心修改：将默认引擎替换为我们 news app 下的自定义中文引擎
+        'ENGINE': 'news.whoosh_cn_backend.CustomWhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+# 当往数据库添加或修改数据时，自动更新搜索索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+# 搜索结果每页显示 5 条
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5

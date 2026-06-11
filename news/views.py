@@ -1,34 +1,19 @@
 from django.shortcuts import render, get_object_or_404
-from .models import News, Category
-from django.core.paginator import Paginator
+from .models import News
 
+# 1. 新闻列表页面
 def news_list(request):
-    category_id = request.GET.get('category')
-    categories = Category.objects.all()
+    # 获取数据库里所有的新闻
+    newsAll = News.objects.all()
+    return render(request, 'news/news_list.html', {'newsList': newsAll})
+
+# 2. 新闻详情页面
+def news_detail(request, id):
+    # 根据点击的 ID 找出对应的新闻
+    news = get_object_or_404(News, id=id)
     
-    if category_id:
-        all_news = News.objects.filter(category_id=category_id)
-    else:
-        all_news = News.objects.all()
-
-    # 分页功能：每页 4 篇
-    paginator = Paginator(all_news, 4)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    # 热门推荐（阅读量最高的前 3 篇）
-    hot_news = News.objects.order_by('-views')[:3]
-
-    return render(request, 'news/news_list.html', {
-        'page_obj': page_obj,
-        'categories': categories,
-        'hot_news': hot_news,
-        'current_category': category_id,
-    })
-
-def news_detail(request, pk):
-    news = get_object_or_404(News, pk=pk)
-    # 增加阅读量统计
+    # 小亮点：每次打开详情页，浏览量自动 +1
     news.views += 1
-    news.save(update_fields=['views'])
+    news.save()
+    
     return render(request, 'news/news_detail.html', {'news': news})

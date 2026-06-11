@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mb-5" style="padding-top: 120px; max-width: 900px;">
+    <a href="{% url 'products:product_list' %}" class="btn btn-sm btn-outline-secondary mb-4 text-white-50" style="border-color: rgba(255,255,255,0.1);">< 返回算力矩阵</a>
+    
+    <div class="card p-4 rounded-4 border-secondary" style="background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08);">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-5">
+                {% if product.photo %}
+                <img src="{{ product.photo.url }}" class="img-fluid rounded-3 border border-secondary" style="width: 100%; object-fit: cover;" alt="产品大图">
+                {% else %}
+                <div class="d-flex align-items-center justify-content-center bg-dark rounded-3" style="height: 250px; border: 1px dashed rgba(255,255,255,0.1);">
+                    <span class="text-white-50 fs-1">🔮</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-md-7">
+                <span class="badge mb-2" style="background: rgba(0,242,254,0.1); color: #00f2fe; border: 1px solid rgba(0,242,254,0.3);">{{ product.productType }}</span>
+                <h2 class="text-white fw-bold mb-3">{{ product.title }}</h2>
+                <h4 class="mb-4" style="color: #00f2fe; font-weight: bold;">标准资费：{{ product.price }}</h4>
+                <p class="text-white-50 mt-1" style="font-size: 0.85rem;">发布上线时间：{{ product.publishDate|date:"Y-m-d" }}</p>
+            </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-top border-secondary">
+            <h5 class="text-white mb-3 fw-bold">⚙️ 算力技术规格与接入规约</h5>
+            <div class="text-light-50" style="line-height: 1.8; font-size: 0.98rem; color: rgba(255,255,255,0.85);">
+                {{ product.description|linebreaksbr }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
